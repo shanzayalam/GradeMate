@@ -1,0 +1,134 @@
+{
+  "endpoints": {
+    "GET /api/quizzes": {
+      "response": [
+        {
+          "id": 1,
+          "name": "Math Quiz 101",
+          "date": "Apr 10, 2025",
+          "students": 24,
+          "graded": 24,
+          "plagiarism": 0
+        }
+      ]
+    },
+
+    "GET /api/quizzes/{quiz_id}/plagiarism": {
+      "params": {
+        "quiz_id": 1
+      },
+      "response": {
+        "quizName": "Math Quiz 101",
+        "date": "Apr 10, 2025",
+        "totalStudents": 24,
+        "averageSimilarity": 0.32,
+        "highSimilarityCount": 5,
+        "students": [
+          {
+            "id": 1,
+            "name": "Alice Johnson",
+            "similarity": 0.85,
+            "flag": true,
+            "matches": ["Bob Smith", "Charlie Brown"]
+          }
+        ]
+      }
+    },
+
+    "POST /api/plagiarism/compare": {
+      "request": {
+        "student1_id": 1,
+        "student2_id": 2
+      },
+      "response": {
+        "student1": {
+          "name": "Alice Johnson",
+          "similarity": 0.85
+        },
+        "student2": {
+          "name": "Bob Smith",
+          "similarity": 0.85
+        },
+        "overallSimilarity": 0.85,
+        "comparisonDetails": [
+          {
+            "section": "Introduction",
+            "similarity": 0.92,
+            "text1": "Lorem ipsum...",
+            "text2": "Lorem ipsum..."
+          }
+        ]
+      }
+    },
+
+    "POST /api/quizzes/grade": {
+      "request": {
+        "Content-Type": "multipart/form-data",
+        "form_data": {
+          "quiz_name": "Math Quiz 101",
+          "solution_image": "(binary file)",
+          "student_submissions": ["(binary file)"]
+        }
+      },
+      "response": {
+        "quizName": "Math Quiz 101",
+        "totalStudents": 24,
+        "averageScore": 82.5,
+        "solutionImage": "base64_encoded_string",
+        "solutionImageText": "extracted text",
+        "students": [
+          {
+            "id": 1,
+            "name": "Alice Johnson",
+            "image": "base64_encoded_string",
+            "score": 85,
+            "similarity": 0.32,
+            "plagiarismFlag": false,
+            "extractedText": "student answer text",
+            "feedback": [
+              {
+                "question": 1,
+                "correct": true,
+                "points": 10,
+                "feedback": "Correct solution"
+              }
+            ]
+          }
+        ]
+      }
+    },
+
+    "POST /api/reports": {
+      "request": {
+        "quiz_id": 1,
+        "report_type": "grading"
+      },
+      "response": {
+        "type": "grading",
+        "timestamp": "2025-04-10T10:30:00Z",
+        "downloadUrl": "https://example.com/reports/mock-report.pdf",
+        "summary": "Grading report for Math Quiz 101"
+      }
+    },
+
+    "POST /api/ocr/extract": {
+      "request": {
+        "Content-Type": "multipart/form-data",
+        "form_data": {
+          "image": "(binary file)"
+        }
+      },
+      "response": {
+        "extractedText": "Text extracted from image"
+      }
+    }
+  },
+
+  "error_response": {
+    "error": {
+      "message": "Error description",
+      "code": 400,
+      "details": "Additional error details"
+    }
+  }
+}

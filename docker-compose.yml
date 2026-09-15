@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./gradeMate-backend
+      dockerfile: Dockerfile
+    container_name: grademate_backend
+    restart: always
+    env_file:
+      - ./gradeMate-backend/.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./gradeMate-backend:/app
+      - backend_media:/app/media
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/api/v1/\")' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./Grademate-main
+      dockerfile: Dockerfile
+    container_name: grademate_frontend
+    restart: always
+    env_file:
+      - ./Grademate-main/.env
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./Grademate-main:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:5173/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  backend_media:

@@ -1,0 +1,92 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#f0f6ff',
+          100: '#e0ecff',
+          200: '#c7daff',
+          300: '#a4bffd',
+          400: '#7a9cfa',
+          500: '#5776f4',
+          600: '#3e58e8',
+          700: '#3244d2',
+          800: '#2c38aa',
+          900: '#2a3485',
+        },
+        neutral: {
+          50: '#f8f8f8',
+          100: '#f2f2f2',
+          200: '#e8e8e8',
+          300: '#d6d6d6',
+          400: '#b8b8b8',
+          500: '#999999',
+          600: '#787878',
+          700: '#5e5e5e',
+          800: '#4a4a4a',
+          900: '#3c3c3c',
+        },
+        success: {
+          50: '#effef8',
+          100: '#d7faee',
+          200: '#b1f2dd',
+          300: '#7ee4c5',
+          400: '#46cea8',
+          500: '#20b18d',
+          600: '#158f73',
+          700: '#13725d',
+          800: '#135b4a',
+          900: '#124b3d',
+        },
+        danger: {
+          50: '#fff1f2',
+          100: '#ffe0e2',
+          200: '#ffc4c9',
+          300: '#ff9da5',
+          400: '#ff6875',
+          500: '#ff3341',
+          600: '#ea1828',
+          700: '#c41021',
+          800: '#a3111e',
+          900: '#88131e',
+        },
+        warning: {
+          50: '#fff9ed',
+          100: '#fff1d4',
+          200: '#ffe1a9',
+          300: '#ffc972',
+          400: '#ffaf45',
+          500: '#fb8a18',
+          600: '#e7600d',
+          700: '#bc430d',
+          800: '#973412',
+          900: '#7b2c13',
+        }
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+      },
+      boxShadow: {
+        'soft': '0 2px 10px rgba(0, 0, 0, 0.05)',
+        'medium': '0 4px 20px rgba(0, 0, 0, 0.08)',
+      },
+      borderRadius: {
+        'lg': '0.5rem',
+        'xl': '0.75rem',
+        '2xl': '1rem',
+      },
+      backgroundImage: {
+        'gradient-primary': 'linear-gradient(to right, var(--tw-gradient-stops))',
+        'gradient-blue-green': 'linear-gradient(135deg, #3e58e8 0%, #20b18d 100%)',
+        'gradient-blue': 'linear-gradient(135deg, #3e58e8 0%, #7a9cfa 100%)',
+        'gradient-green': 'linear-gradient(135deg, #20b18d 0%, #7ee4c5 100%)',
+      },
+    },
+  },
+  plugins: [],
+}
